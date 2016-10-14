@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<!-- 全局setting -->
+	
+	<!-- 自定义别名 -->
+	<typeAliases>
+		<!-- 
+			批量别名定义
+			指定包名，MyBatis自动扫描包中的po类，自动定义别名，别名就是类名（首字母大写或小写都可以）
+		 -->
+		 <package name="com.jimmy.ssm.po"/>
+	</typeAliases>
+	
+	<!-- 
+		配置mapper
+		由于使用spring和mybatis的整合包进行mapper扫描，这里不需要配置了
+		必须遵循：mapper.xml配置文件和mapper.java接口同名且在一个目录下
+	 -->
+
+</configuration>

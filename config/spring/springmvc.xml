@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 实际开发中使用组件扫描加载handler bean -->
+	<context:component-scan base-package="com.jimmy.ssm.controller"></context:component-scan>
+	
+	<!-- 注解的处理器映射器 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean> -->
+	
+	<!-- 注解的处理器适配器 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean> -->
+
+	<!-- 
+		使用<mvc:annotation-driven>代替上面的处理器映射器和处理器适配器配置
+		默认加载很多的参数绑定方法，比如：json转换的解析器
+		实际开发中建议使用
+	 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<!-- 
+		视图解析器
+		解析jsp，默认使用jstl标签，确保导入了jstl的jar包
+		prefix：视图url前缀
+		suffix：视图url后缀
+		配置前缀和后缀可以简化handler中视图指定的代码
+			modelAndView.setViewName("items/itemsList");
+	 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- /WEB-INF/jsp/items/itemsList.jsp -->
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+</beans>

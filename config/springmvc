@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 实际开发中使用组件扫描加载handler bean -->
+	<context:component-scan base-package="com.jimmy.ssm.controller"></context:component-scan>
+
+	<!-- 
+		处理器适配器
+		所有处理器适配器都实现了HandlerAdapter接口
+	 -->
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>
+	
+	<!-- 
+		另一种处理器适配器
+	 -->
+	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"></bean>
+	
+	<!-- 
+		处理器映射器
+		将bean的name作为url进行查找，需要在配置handler时指定bean name（也就是url）
+	 -->
+	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>
+	
+	<!-- 
+		简单url处理器映射器
+	 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<!-- Map URL paths to handler bean names -->
+				<prop key="/items/queryItem1.action">itemsController1</prop>
+				<prop key="/items/queryItem2.action">itemsController2</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 配置handler -->
+	<bean id="itemsController1" name="/items/queryItem.action" class="com.jimmy.ssm.controller.ItemsController1"></bean>
+	
+	<bean id="itemsController2" class="com.jimmy.ssm.controller.ItemsController2"></bean>	
+	
+	<!-- 
+		视图解析器
+		解析jsp，默认使用jstl标签，确保导入了jstl的jar包
+	 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"></bean>
+	
+	
+	<!-- 注解的处理器映射器 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+	
+	<!-- 注解的处理器适配器 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean>
+
+	<!-- 
+		使用<mvc:annotation-driven>代替上面的处理器映射器和处理器适配器配置
+		默认加载很多的参数绑定方法，比如：json转换的解析器
+		实际开发中建议使用
+	 -->
+	<!-- <mvc:annotation-driven></mvc:annotation-driven> -->
+
+</beans>
