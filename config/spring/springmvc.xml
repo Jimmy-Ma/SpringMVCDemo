@@ -21,7 +21,18 @@
 		默认加载很多的参数绑定方法，比如：json转换的解析器
 		实际开发中建议使用
 	 -->
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+	
+	<!-- 自定义参数绑定 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<!-- 转换器 -->
+		<property name="converters">
+			<list>
+				<!-- 日期类型转换器 -->
+				<bean class="com.jimmy.ssm.controller.converter.CustomDateConverter"></bean>
+			</list>
+		</property>
+	</bean>
 	
 	<!-- 
 		视图解析器

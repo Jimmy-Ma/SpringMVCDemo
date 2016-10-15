@@ -1,10 +1,14 @@
 package com.jimmy.ssm.po;
 
+import java.util.List;
+
 public class ItemsQueryVo {
 	
 	private Items items;
 	
-	private ItemsQueryVo itemsQueryVo;
+	private ItemsCustom itemsCustom;
+	
+	private List<ItemsCustom> itemsCustomList;
 
 	public Items getItems() {
 		return items;
@@ -14,12 +18,20 @@ public class ItemsQueryVo {
 		this.items = items;
 	}
 
-	public ItemsQueryVo getItemsQueryVo() {
-		return itemsQueryVo;
+	public ItemsCustom getItemsCustom() {
+		return itemsCustom;
 	}
 
-	public void setItemsQueryVo(ItemsQueryVo itemsQueryVo) {
-		this.itemsQueryVo = itemsQueryVo;
+	public void setItemsCustom(ItemsCustom itemsCustom) {
+		this.itemsCustom = itemsCustom;
 	}
+
+	public List<ItemsCustom> getItemsCustomList() {
+		return itemsCustomList;
+	}
+
+	public void setItemsCustomList(List<ItemsCustom> itemsCustomList) {
+		this.itemsCustomList = itemsCustomList;
+	}	
 	
 }
