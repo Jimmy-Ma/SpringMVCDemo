@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.jimmy.ssm.exception.CustomException;
 import com.jimmy.ssm.mapper.ItemsMapper;
 import com.jimmy.ssm.mapper.ItemsMapperCustom;
 import com.jimmy.ssm.po.Items;
@@ -30,9 +31,14 @@ public class ItemsServiceImpl implements ItemsService {
 	public ItemsCustom findItemsById(Integer id) throws Exception {
 		Items items = itemsMapper.selectByPrimaryKey(id);
 		//对商品信息进行业务处理
-		ItemsCustom itemsCustom = new ItemsCustom();
-		//items的内容拷贝到itemsCustom
-		BeanUtils.copyProperties(items, itemsCustom);
+		ItemsCustom itemsCustom = null;
+		if (items != null) {
+			itemsCustom = new ItemsCustom();
+			//items的内容拷贝到itemsCustom
+			BeanUtils.copyProperties(items, itemsCustom);
+		} else {
+			throw new CustomException("商品信息不存在！");
+		}
 		return itemsCustom;
 	}
 

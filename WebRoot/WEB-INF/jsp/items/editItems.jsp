@@ -10,8 +10,12 @@
 
 </head>
 <body>
-
-	<form id="itemForm" action="${pageContext.request.contextPath}/items/eidtItemsSubmit.action" method="post">
+<c:if test="${allErrors!=null }">
+	<c:forEach items="${allErrors }" var="error">
+		${error.defaultMessage}
+	</c:forEach>
+</c:if>
+	<form id="itemForm" action="${pageContext.request.contextPath}/items/eidtItemsSubmit.action" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="${itemsCustom.id }" /> 修改商品信息：
 		<table width="100%" border=1>
 			<tr>
@@ -27,13 +31,16 @@
 				<td><input type="text" name="createtime"
 					value="<fmt:formatDate value="${itemsCustom.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/>" /></td>
 			</tr>
-<%-- 			<tr>
+			<tr>
 				<td>商品图片</td>
-				<td><c:if test="${itemsCustom.pic !=null}">
-						<img src="/pic/${item.pic}" width=100 height=100 />
+				<td>
+					<c:if test="${itemsCustom.pic !=null}">
+						<img src="/pics/${itemsCustom.pic}" width=100 height=100 />
 						<br />
-					</c:if> <input type="file" name="pictureFile" /></td>
-			</tr> --%>
+					</c:if> 
+					<input type="file" name="items_pic" />
+				</td>
+			</tr>
 			<tr>
 				<td>商品简介</td>
 				<td><textarea rows="3" cols="30" name="detail">${itemsCustom.detail }</textarea>

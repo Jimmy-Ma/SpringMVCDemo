@@ -2,15 +2,26 @@ package com.jimmy.ssm.po;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.jimmy.ssm.controller.validation.ValidationGroup1;
+
 public class Items {
     private Integer id;
 
+    //校验名称在1到30个字符之间
+    //message：出错提示信息
+    //groups：此校验属于哪个分组，可以指定多个分组
+    @Size(min=1, max=30, message="{items.name.length.error}", groups={ValidationGroup1.class})
     private String name;
 
     private Float price;
 
     private String pic;
 
+    //非空校验
+    @NotNull(message="{items.createtime.isNull}")
     private Date createtime;
 
     private String detail;
