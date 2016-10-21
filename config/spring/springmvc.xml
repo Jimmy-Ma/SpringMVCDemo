@@ -97,4 +97,22 @@
 		</property>
 	</bean>
 	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<!-- 多个拦截器顺序执行 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.jimmy.ssm.intercepter.LoginIntercepter"></bean>
+		</mvc:interceptor>		
+		<mvc:interceptor>
+			<!-- /**表示所有url 包括子url路径 -->
+			<mvc:mapping path="/**"/>
+			<bean class="com.jimmy.ssm.intercepter.HandlerIntercepter1"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.jimmy.ssm.intercepter.HandlerIntercepter2"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+		
 </beans>
