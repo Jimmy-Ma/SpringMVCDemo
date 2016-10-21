@@ -10,6 +10,13 @@
 	<!-- 实际开发中使用组件扫描加载handler bean -->
 	<context:component-scan base-package="com.jimmy.ssm.controller"></context:component-scan>
 	
+	<!-- 
+		静态资源解析
+		包括js、css、img...
+	 -->
+	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+	<mvc:resources location="/img/" mapping="/img/**"></mvc:resources>
+	
 	<!-- 注解的处理器映射器 -->
 	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean> -->
 	
